@@ -93,4 +93,11 @@ class CI_Controller {
 		return self::$instance;
 	}
 
+	public function isLogged($message) {
+		if (!$this->session->userdata('loggedIn')) {
+			$this->session->set_flashdata('loginFail', $message);
+            redirect('users/login');
+        }
+	}
+
 }

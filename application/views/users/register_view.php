@@ -1,10 +1,10 @@
 <?php if (!$this->session->userdata('loggedIn')) :?>
 
-<h2>Login Form</h2>
+<h2>Register Form</h2>
 
 <?php
 $attributes = array(
-    'id' => 'login_form',
+    'id' => 'register_form',
     'class' => 'form_horizontal'
 );
 if ($this->session->flashdata('error')) :
@@ -15,8 +15,44 @@ if ($this->session->flashdata('error')) :
 <?php
 endif;
 
-echo form_open('users/submitLogin', $attributes);
+echo form_open('users/submitRegister', $attributes);
 ?>
+
+    <div class="form-group">
+        <?php
+        echo form_label('First Name');
+        $data = array(
+            'class' => 'form-control',
+            'name' => 'fname',
+            'placeholder' => 'Enter First Name'
+        );
+        echo form_input($data);
+        ?>
+    </div>
+
+    <div class="form-group">
+        <?php
+        echo form_label('Last Name');
+        $data = array(
+            'class' => 'form-control',
+            'name' => 'lname',
+            'placeholder' => 'Enter Last name'
+        );
+        echo form_input($data);
+        ?>
+    </div>
+
+    <div class="form-group">
+        <?php
+        echo form_label('Email');
+        $data = array(
+            'class' => 'form-control',
+            'name' => 'email',
+            'placeholder' => 'Enter Email address'
+        );
+        echo form_input($data);
+        ?>
+    </div>
 
     <div class="form-group">
         <?php
@@ -58,8 +94,8 @@ echo form_open('users/submitLogin', $attributes);
         <?php
         $data = array(
             'class' => 'btn btn-primary',
-            'name' => 'submitLogin',
-            'value' => 'Login'
+            'name' => 'submitRegister',
+            'value' => 'Register'
         );
         echo form_submit($data);
         ?>
@@ -68,17 +104,17 @@ echo form_open('users/submitLogin', $attributes);
 <?php
 echo form_close();
 $attributes = array(
-    'id' => 'to_register',
+    'id' => 'to_login',
     'class' => 'form_horizontal'
 );
-echo form_open('users/register', $attributes);
+echo form_open('users/login', $attributes);
 ?>
     <div class="form-group">
         <?php
         $data = array(
             'class' => 'btn btn-success',
-            'name' => 'register',
-            'value' => 'Register'
+            'name' => 'login',
+            'value' => 'Login'
         );
         echo form_submit($data);
         ?>
@@ -88,35 +124,7 @@ echo form_close();
 
 else:
 
-?>
-    <h2>Logout</h2>
+    redirect('users/login');
 
-    <p>
-<?php
-    $attributes = array(
-        'id' => 'logout_form',
-        'class' => 'form_horizontal'
-    );
-    echo form_open('users/logout', $attributes);
-
-    if ($this->session->userdata('username')) :
-        echo "You are logged in as " . ucwords($this->session->userdata('username'));
-    endif;
-?>
-    </p>
-
-    <div class="form-group">
-    <?php
-    $data = array(
-        'class' => 'btn btn-primary',
-        'name' => 'logout',
-        'value' => 'Logout'
-    );
-    echo form_submit($data);
-    ?>
-    </div>
-
-<?php
-    echo form_close();
 endif;
 ?>
