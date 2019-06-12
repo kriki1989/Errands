@@ -17,3 +17,11 @@
 .p-5 {
     padding: 30px;
 }
+
+.task_edit:hover {
+    color:rgb(126, 175, 231);
+}
+
+.task_delete:hover {
+    color:red;
+}

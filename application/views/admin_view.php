@@ -1,4 +1,7 @@
-<h1>Welcome to Errands Application</h1>
+<div class="jumbotron text-center">
+    <h2>Welcome to Errands Application</h2>
+</div>
+
 
 <?php
     if ($this->session->flashdata('loginSuccess')) :
@@ -13,7 +16,9 @@
 ?>
 
 <p>From here you can navigate through your projects and tasks and modify them the way you like it. Feel free to enjoy!</p>
+<br>
 
+<h1>Projects</h1>
 <table class="table table-hover">
     <thead>
         <tr>

@@ -20,9 +20,10 @@ class Projects extends CI_Controller
         $this->load->view('layouts/main', $data);
     }
 
-    public function display($id)
+    public function display($projectId)
     {
-        $data['project'] = $this->Project->getProject($id);
+        $data['project'] = $this->Project->getProject($projectId);
+        $data['tasks'] = $this->Task->getTasks($projectId);
         $data['main'] = 'projects/display';
         $data['sidebar'] = 'users/login_view';
         $this->load->view('layouts/main', $data);
@@ -63,7 +64,7 @@ class Projects extends CI_Controller
         }
     }
 
-    public function edit($id)
+    public function edit($projectId)
     {
         $this->form_validation->set_rules(
             'name',
@@ -78,7 +79,7 @@ class Projects extends CI_Controller
 
         // use this in case you don't want to preview errors
         if ($this->form_validation->run() == false) {
-            $data['project'] = $this->Project->getProject($id);
+            $data['project'] = $this->Project->getProject($projectId);
             $data['main'] = 'projects/edit';
             $data['sidebar'] = 'users/login_view';
             $this->load->view('layouts/main', $data);
@@ -100,8 +101,9 @@ class Projects extends CI_Controller
         }
     }
 
-    public function delete($id) {
-        if ($this->Project->delete($id)) {
+    public function delete($projectId) {
+        if ($this->Project->delete($projectId)) {
+            $this->Task->deleteAll($projectId);
             $this->session->set_flashdata('projectSuccess', 'The project was deleted successfully');
             redirect('projects/index');
         } else {
