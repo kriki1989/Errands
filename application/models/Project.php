@@ -3,8 +3,9 @@
 class Project extends CI_Model
 {
 
-    public function getProjects()
+    public function getProjects($userId)
     {
+        $this->db->where('user_id', $userId);
         $result = $this->db->get('projects');
         return $result->result();
     }

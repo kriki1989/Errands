@@ -1,4 +1,7 @@
-<h1>Welcome to Errands Application</h1>
+<div class="jumbotron text-center">
+    <h2>Welcome to Errands Application</h2>
+</div>
+
 <?php
     if ($this->session->flashdata('loginFail')) :
 ?>

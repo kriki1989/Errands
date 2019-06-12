@@ -89,7 +89,7 @@ echo form_close();
 else:
 
 ?>
-    <h2>Logout</h2>
+    <h2>Hello <?php echo ucwords($this->session->userdata('username')); ?></h2>
 
     <p>
 <?php
@@ -99,9 +99,6 @@ else:
     );
     echo form_open('users/logout', $attributes);
 
-    if ($this->session->userdata('username')) :
-        echo "You are logged in as " . ucwords($this->session->userdata('username'));
-    endif;
 ?>
     </p>
 

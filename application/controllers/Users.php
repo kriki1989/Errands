@@ -114,6 +114,7 @@ class Users extends CI_Controller
             if ($this->User->registerUser($addUserData)) {
 
                 $userId = $this->User->loginUser($username, $hash_password);
+                $data['projects'] = $this->Project->getProjects($userId);
 
                 $userData = array(
                     'userId' => $userId,
@@ -134,6 +135,8 @@ class Users extends CI_Controller
     {
         $data['main'] = 'home_view';
         if ($this->session->userdata('loggedIn')) {
+            $userId = $this->session->userdata('userId');
+            $data['projects'] = $this->Project->getProjects($userId);
             $data['main'] = 'admin_view';
         }
         $data['sidebar'] = 'users/login_view';

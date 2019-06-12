@@ -12,7 +12,8 @@ class Projects extends CI_Controller
 
     public function index()
     {
-        $data['projects'] = $this->Project->getProjects();
+        $userId = $this->session->userdata('userId');
+        $data['projects'] = $this->Project->getProjects($userId);
 
         $data['main'] = 'projects/index';
         $data['sidebar'] = 'users/login_view';
