@@ -89,6 +89,24 @@ class Users extends CI_Controller
         );
 
         if ($this->form_validation->run() == false) {
+
+            $data = array(
+                'fname' => form_error('fname'),
+                'lname' => form_error('lname'),
+                'email' => form_error('email'),
+                'username' => form_error('username'),
+                'password' => form_error('password'),
+                'confirmPassword' => form_error('confirmPassword'),
+                'fname_value' => set_value('fname'),
+                'lname_value' => set_value('lname'),
+                'email_value' => set_value('email'),
+                'username_value' => set_value('username')
+            );
+            $this->session->set_flashdata($data);
+            redirect('users/register');
+
+        } else {
+
             $data = array(
                 'fname' => form_error('fname'),
                 'lname' => form_error('lname'),
@@ -102,10 +120,18 @@ class Users extends CI_Controller
                 'username_value' => set_value('username')
             );
 
-            $this->session->set_flashdata($data, $values);
+            if ($this->User->emailExists($this->input->post('email'))) {
+                $data['email'] = 'This email exists';
+                $this->session->set_flashdata($data);
+                redirect('users/register');
+            }
 
-            redirect('users/register');
-        } else {
+            if ($this->User->usernameExists($this->input->post('username'))) {
+                $data['username'] = 'This username exists';
+                $this->session->set_flashdata($data);
+                redirect('users/register');
+            }
+
             $first_name = $this->input->post('fname');
             $last_name = $this->input->post('lname');
             $email = $this->input->post('email');

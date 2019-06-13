@@ -23,4 +23,24 @@ class User extends CI_Model
         return $this->db->insert('users', $data, true);
     }
 
+    public function usernameExists($username)
+    {
+        $this->db->where('username', $username);
+        $result = $this->db->get('users');
+        if ($result->result() != array()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function emailExists($email)
+    {
+        $this->db->where('email', $email);
+        $result = $this->db->get('users');
+        if ($result->result() != array()) {
+            return true;
+        }
+        return false;
+    }
+
 }
