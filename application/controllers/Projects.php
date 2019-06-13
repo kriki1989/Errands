@@ -23,7 +23,10 @@ class Projects extends CI_Controller
     public function display($projectId)
     {
         $data['project'] = $this->Project->getProject($projectId);
-        $data['tasks'] = $this->Task->getTasks($projectId);
+
+        $data['completedTasks'] = $this->Task->getTasks($projectId, 1);
+        $data['activeTasks'] = $this->Task->getTasks($projectId, 0);
+
         $data['main'] = 'projects/display';
         $data['sidebar'] = 'users/login_view';
         $this->load->view('layouts/main', $data);
@@ -85,13 +88,12 @@ class Projects extends CI_Controller
             $this->load->view('layouts/main', $data);
         } else {
             $data = array(
-                'id' => $id,
                 'user_id' => $this->session->userdata('userId'),
                 'name' => strtoupper($this->input->post('name')),
                 'body' => $this->input->post('body')
             );
 
-            if ($this->Project->replace($data)) {
+            if ($this->Project->update($projectId, $data)) {
                 $this->session->set_flashdata('projectSuccess', 'Your project has been edited');
                 redirect('projects/index');
             } else {

@@ -18,10 +18,20 @@
     padding: 30px;
 }
 
+.task_edit,
+.task_delete,
+.task_status {
+    color: black;
+}
+
 .task_edit:hover {
-    color:rgb(126, 175, 231);
+    color:rgb(100, 143, 192);
 }
 
 .task_delete:hover {
     color:red;
+}
+
+.task_status:hover {
+    color: rgb(119, 201, 119);
 }

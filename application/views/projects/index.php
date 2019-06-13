@@ -24,6 +24,7 @@
 ?>
 <a class="btn btn-primary pull-right" href="<?php echo base_url();?>projects/create">Create Project</a>
 
+<?php if ($projects !== array()) { ?>
 <table class="table table-hover">
     <thead>
         <tr>
@@ -57,3 +58,4 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+<?php } ?>

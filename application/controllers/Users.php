@@ -137,6 +137,7 @@ class Users extends CI_Controller
         if ($this->session->userdata('loggedIn')) {
             $userId = $this->session->userdata('userId');
             $data['projects'] = $this->Project->getProjects($userId);
+            $data['tasks'] = $this->Task->getAllTasks($userId);
             $data['main'] = 'admin_view';
         }
         $data['sidebar'] = 'users/login_view';
@@ -147,6 +148,9 @@ class Users extends CI_Controller
     {
         $data['main'] = 'home_view';
         if ($this->session->userdata('loggedIn')) {
+            $userId = $this->session->userdata('userId');
+            $data['projects'] = $this->Project->getProjects($userId);
+            $data['tasks'] = $this->Task->getAllTasks($userId);
             $data['main'] = 'admin_view';
         }
         $data['sidebar'] = 'users/register_view';

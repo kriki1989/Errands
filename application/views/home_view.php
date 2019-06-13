@@ -1,4 +1,4 @@
-<div class="jumbotron text-center">
+<div class="jumbotron text-center" style="background-color:#0066cc;  color:white">
     <h2>Welcome to Errands Application</h2>
 </div>
 

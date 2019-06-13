@@ -93,7 +93,8 @@ class Tasks extends CI_Controller
         }
     }
 
-    public function delete($taskId, $projectId) {
+    public function delete($taskId, $projectId)
+    {
         if ($this->Task->delete($taskId)) {
             $this->session->set_flashdata('taskSuccess', 'The task was deleted successfully');
             redirect('projects/display/' . $projectId);
@@ -101,5 +102,12 @@ class Tasks extends CI_Controller
             $this->session->set_flashdata('taskFail', 'The task failed to delete.');
             redirect('projects/display/' . $projectId);
         }
+    }
+
+    public function status($taskId, $projectId, $status)
+    {
+        ($status == 0 ? $status = 1 : $status = 0);
+        $this->Task->status($taskId, $status);
+        redirect('projects/display/' . $projectId);
     }
 }

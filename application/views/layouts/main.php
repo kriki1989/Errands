@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/main.css">
     <script src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/2f735f386b.js"></script>
 </head>
-<body>
+<body style="background-image: url('/assets/images/background.jpg')">
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">

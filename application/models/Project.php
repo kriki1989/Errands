@@ -24,14 +24,20 @@ class Project extends CI_Model
         return $this->db->insert('projects', $data);
     }
 
-    public function replace($data)
+    public function update($projectId, $data)
     {
-        return $this->db->replace('projects', $data);
+        $this->db->where('id', $projectId);
+        return $this->db->update('projects', $data);
     }
 
     public function delete($id)
     {
         $this->db->where('id', $id);
         return $this->db->delete('projects');
+    }
+
+    public function getProjectId($userId)
+    {
+
     }
 }

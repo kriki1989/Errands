@@ -2,10 +2,24 @@
 
 class Task extends CI_Model
 {
-    public function getTasks($projectId)
+    public function getTasks($projectId, $status)
     {
-        $this->db->where('project_id', $projectId);
+        $this->db->where(array(
+            'project_id' => $projectId,
+            'status' => $status
+        ));
         $query = $this->db->get('tasks');
+
+        return $query->result();
+    }
+
+    public function getAllTasks($userId)
+    {
+        $this->db->select('tasks.id, tasks.name, tasks.body, tasks.status, projects.name as category');
+        $this->db->from('tasks');
+        $this->db->join('projects', 'projects.id = tasks.project_id', 'inner');
+        $this->db->where('projects.user_id', $userId);
+        $query = $this->db->get();
 
         return $query->result();
     }
@@ -38,5 +52,11 @@ class Task extends CI_Model
     {
         $this->db->where('id', $taskId);
         return $this->db->delete('tasks');
+    }
+
+    public function status($taskId, $status)
+    {
+        $this->db->where('id', $taskId);
+        return $this->db->update('tasks', array('status' => $status));
     }
 }
