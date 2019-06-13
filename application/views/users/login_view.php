@@ -7,13 +7,6 @@ $attributes = array(
     'id' => 'login_form',
     'class' => 'form_horizontal'
 );
-if ($this->session->flashdata('error')) :
-?>
-<div style="color:red">
-    <i><?php echo $this->session->flashdata('error'); ?></i>
-</div>
-<?php
-endif;
 
 echo form_open('users/submitLogin', $attributes);
 ?>
@@ -24,10 +17,14 @@ echo form_open('users/submitLogin', $attributes);
         $data = array(
             'class' => 'form-control',
             'name' => 'username',
-            'placeholder' => 'Enter username'
+            'placeholder' => 'Enter username',
+            'value' => $this->session->flashdata('username_value')
         );
         echo form_input($data);
         ?>
+    </div>
+    <div class="error">
+        <i><?php echo $this->session->flashdata('username'); ?></i>
     </div>
 
     <div class="form-group">
@@ -41,6 +38,9 @@ echo form_open('users/submitLogin', $attributes);
         echo form_password($data);
         ?>
     </div>
+    <div class="error">
+        <i><?php echo $this->session->flashdata('password'); ?></i>
+    </div>
 
     <div class="form-group">
         <?php
@@ -53,8 +53,11 @@ echo form_open('users/submitLogin', $attributes);
         echo form_password($data);
         ?>
     </div>
+    <div class="error">
+        <i><?php echo $this->session->flashdata('confirmPassword'); ?></i>
+    </div>
 
-    <div class="form-group">
+    <div class="form-group mb-5">
         <?php
         $data = array(
             'class' => 'btn btn-primary',

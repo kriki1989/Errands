@@ -22,7 +22,10 @@ class Users extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data = array(
-                'error' => validation_errors()
+                'username' => form_error('username'),
+                'password' => form_error('password'),
+                'confirmPassword' => form_error('confirmPassword'),
+                'username_value' => set_value('username')
             );
 
             $this->session->set_flashdata($data);
@@ -87,10 +90,19 @@ class Users extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data = array(
-                'error' => validation_errors()
+                'fname' => form_error('fname'),
+                'lname' => form_error('lname'),
+                'email' => form_error('email'),
+                'username' => form_error('username'),
+                'password' => form_error('password'),
+                'confirmPassword' => form_error('confirmPassword'),
+                'fname_value' => set_value('fname'),
+                'lname_value' => set_value('lname'),
+                'email_value' => set_value('email'),
+                'username_value' => set_value('username')
             );
 
-            $this->session->set_flashdata($data);
+            $this->session->set_flashdata($data, $values);
 
             redirect('users/register');
         } else {

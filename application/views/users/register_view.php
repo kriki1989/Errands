@@ -7,13 +7,6 @@ $attributes = array(
     'id' => 'register_form',
     'class' => 'form_horizontal'
 );
-if ($this->session->flashdata('error')) :
-?>
-<div style="color:red">
-    <i><?php echo $this->session->flashdata('error'); ?></i>
-</div>
-<?php
-endif;
 
 echo form_open('users/submitRegister', $attributes);
 ?>
@@ -24,10 +17,14 @@ echo form_open('users/submitRegister', $attributes);
         $data = array(
             'class' => 'form-control',
             'name' => 'fname',
-            'placeholder' => 'Enter First Name'
+            'placeholder' => 'Enter First Name',
+            'value' => $this->session->flashdata('fname_value')
         );
         echo form_input($data);
         ?>
+    </div>
+    <div class="error">
+        <i><?php echo $this->session->flashdata('fname'); ?></i>
     </div>
 
     <div class="form-group">
@@ -36,10 +33,14 @@ echo form_open('users/submitRegister', $attributes);
         $data = array(
             'class' => 'form-control',
             'name' => 'lname',
-            'placeholder' => 'Enter Last name'
+            'placeholder' => 'Enter Last name',
+            'value' => $this->session->flashdata('lname_value')
         );
         echo form_input($data);
         ?>
+    </div>
+    <div class="error">
+        <i><?php echo $this->session->flashdata('lname'); ?></i>
     </div>
 
     <div class="form-group">
@@ -48,10 +49,14 @@ echo form_open('users/submitRegister', $attributes);
         $data = array(
             'class' => 'form-control',
             'name' => 'email',
-            'placeholder' => 'Enter Email address'
+            'placeholder' => 'Enter Email address',
+            'value' => $this->session->flashdata('email_value')
         );
         echo form_input($data);
         ?>
+    </div>
+    <div class="error">
+        <i><?php echo $this->session->flashdata('email'); ?></i>
     </div>
 
     <div class="form-group">
@@ -60,10 +65,14 @@ echo form_open('users/submitRegister', $attributes);
         $data = array(
             'class' => 'form-control',
             'name' => 'username',
-            'placeholder' => 'Enter username'
+            'placeholder' => 'Enter username',
+            'value' => $this->session->flashdata('username_value')
         );
         echo form_input($data);
         ?>
+    </div>
+    <div class="error">
+        <i><?php echo $this->session->flashdata('username'); ?></i>
     </div>
 
     <div class="form-group">
@@ -77,6 +86,9 @@ echo form_open('users/submitRegister', $attributes);
         echo form_password($data);
         ?>
     </div>
+    <div class="error">
+        <i><?php echo $this->session->flashdata('password'); ?></i>
+    </div>
 
     <div class="form-group">
         <?php
@@ -89,8 +101,11 @@ echo form_open('users/submitRegister', $attributes);
         echo form_password($data);
         ?>
     </div>
+    <div class="error">
+        <i><?php echo $this->session->flashdata('confirmPassword'); ?></i>
+    </div>
 
-    <div class="form-group">
+    <div class="form-group mb-5">
         <?php
         $data = array(
             'class' => 'btn btn-primary',

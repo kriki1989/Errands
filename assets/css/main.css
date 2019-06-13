@@ -35,3 +35,16 @@
 .task_status:hover {
     color: rgb(119, 201, 119);
 }
+
+.form-group {
+    margin-bottom: 0px !important;
+}
+
+.error {
+    color:red;
+    margin-bottom: 15px;
+}
+
+.mb-5 {
+    margin-bottom: 15px !important;
+}
