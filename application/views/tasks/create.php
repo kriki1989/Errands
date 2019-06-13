@@ -10,7 +10,7 @@ $attributes = array(
 echo form_open('tasks/create/' . $this->uri->segment(3), $attributes);
 ?>
 
-    <div class="form-group">
+    <div class="form-group mb-5">
         <?php
         echo form_label('Task Name');
         $data = array(
@@ -22,7 +22,7 @@ echo form_open('tasks/create/' . $this->uri->segment(3), $attributes);
         ?>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mb-5">
         <?php
         echo form_label('Description');
         $data = array(
@@ -34,7 +34,7 @@ echo form_open('tasks/create/' . $this->uri->segment(3), $attributes);
         ?>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mb-5">
         <?php
         echo form_label('Due Date');
         $data = array(

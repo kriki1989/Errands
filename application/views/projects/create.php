@@ -10,7 +10,7 @@ $attributes = array(
 echo form_open('projects/create', $attributes);
 ?>
 
-    <div class="form-group">
+    <div class="form-group mb-5">
         <?php
         echo form_label('Project Name');
         $data = array(
@@ -22,7 +22,7 @@ echo form_open('projects/create', $attributes);
         ?>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mb-5">
         <?php
         echo form_label('Description');
         $data = array(

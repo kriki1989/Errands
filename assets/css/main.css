@@ -48,3 +48,18 @@
 .mb-5 {
     margin-bottom: 15px !important;
 }
+
+.navbar-inverse {
+    background-color: #1A65C8 !important;
+    border-color: #1A65C8 !important;
+}
+
+.navbar-inverse .navbar-nav>li>a,
+.navbar-inverse .navbar-brand {
+    color: white !important;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover,
+.navbar-inverse .navbar-brand:hover {
+    color: rgb(117, 164, 226) !important;
+}

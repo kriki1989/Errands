@@ -37,26 +37,21 @@
 
             <h4>Project Actions</h4>
 
-            <li class="list-group-item">
-                <a href="<?php echo base_url(); ?>projects/edit/<?php echo $project->id ?>">
-                    Edit Project
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a href="<?php echo base_url(); ?>projects/delete/<?php echo $project->id ?>">
+            <a href="<?php echo base_url(); ?>projects/edit/<?php echo $project->id ?>" class="list-group-item list-group-item-warning">
+                Edit Project
+            </a>
+
+            <a href="<?php echo base_url(); ?>projects/delete/<?php echo $project->id ?>" class="list-group-item list-group-item-danger">
                     Delete Project
-                </a>
-            </li>
+            </a>
 
             <br>
 
             <h4>Task Action</h4>
 
-            <li class="list-group-item">
-                <a href="<?php echo base_url(); ?>tasks/create/<?php echo $project->id ?>">
-                    Create Task
-                </a>
-            </li>
+            <a href="<?php echo base_url(); ?>tasks/create/<?php echo $project->id ?>" class="list-group-item list-group-item-success">
+                Create Task
+            </a>
 
         </ul>
     </div>
@@ -67,109 +62,124 @@
     <div class="col-xs-12">
 
         <h1>Tasks</h1>
+        <div class="panel panel-primary">
+            <div class="panel-heading"><strong><h4>Active tasks</h4></strong></div>
+            <?php if ($activeTasks !== array()) { ?>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Task Name
+                        </th>
 
-        <h3><u>Active tasks</u></h3>
+                        <th>
+                            Task Body
+                        </th>
+                        <th>Date</th>
+                        <th>Due Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($activeTasks as $task): ?>
+                    <tr>
+                        <td>
+                            <?php echo $task->name; ?><br>
+                            <a class="task_status" href="<?php echo base_url(); ?>tasks/status/<?php echo $task->id; ?>/<?php echo $project->id; ?>/<?php echo $task->status; ?>">
+                                <i class="fas fa-check"></i>
+                            </a>
+                            |
+                            <a class="task_edit" href="<?php echo base_url(); ?>tasks/edit/<?php echo $task->id; ?>/<?php echo $project->id; ?>">
+                                <i class="fas fa-pen"></i>
+                            </a>
+                            |
+                            <a class="task_delete" href="<?php echo base_url(); ?>tasks/delete/<?php echo $task->id; ?>/<?php echo $project->id; ?>">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <?php echo $task->body; ?>
+                        </td>
+                        <td>
+                            <?php echo nice_date($task->created_at, 'd-m-Y H:m:s'); ?>
+                        </td>
+                        <td>
+                            <?php echo nice_date($task->due_date, 'd-m-Y'); ?>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <?php } else { ?>
+                <table class="table">
+                    <tr>
+                        <td>
+                            No active tasks
+                        </td>
+                    </tr>
+                </table>
+            <?php } ?>
+        </div>
 
-        <?php if ($activeTasks !== array()) { ?>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>
-                        Task Name
-                    </th>
+        <div class="panel panel-success">
+            <div class="panel-heading"><strong><h4>Completed tasks</h4></strong></div>
 
-                    <th>
-                        Task Body
-                    </th>
-                    <th>Date</th>
-                    <th>Due Date</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($activeTasks as $task): ?>
-                <tr>
-                    <td>
-                        <?php echo $task->name; ?><br>
-                        <a class="task_status" href="<?php echo base_url(); ?>tasks/status/<?php echo $task->id; ?>/<?php echo $project->id; ?>/<?php echo $task->status; ?>">
-                            <i class="fas fa-check"></i>
-                        </a>
-                        |
-                        <a class="task_edit" href="<?php echo base_url(); ?>tasks/edit/<?php echo $task->id; ?>/<?php echo $project->id; ?>">
-                            <i class="fas fa-pen"></i>
-                        </a>
-                        |
-                        <a class="task_delete" href="<?php echo base_url(); ?>tasks/delete/<?php echo $task->id; ?>/<?php echo $project->id; ?>">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <?php echo $task->body; ?>
-                    </td>
-                    <td>
-                        <?php echo nice_date($task->created_at, 'd-m-Y H:m:s'); ?>
-                    </td>
-                    <td>
-                        <?php echo nice_date($task->due_date, 'd-m-Y'); ?>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <?php } else { ?>
-            No active tasks
-        <?php } ?>
+                <?php if ($completedTasks !== array()) { ?>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Task Name
+                            </th>
 
-        <h3><u>Completed tasks</u></h3>
-
-        <?php if ($completedTasks !== array()) { ?>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>
-                        Task Name
-                    </th>
-
-                    <th>
-                        Task Body
-                    </th>
-                    <th>Date</th>
-                    <th>Due Date</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($completedTasks as $task): ?>
-                <tr>
-                    <td>
-                        <?php echo $task->name; ?><br>
-                        <a class="task_status" href="<?php echo base_url(); ?>tasks/status/<?php echo $task->id; ?>/<?php echo $project->id; ?>/<?php echo $task->status; ?>">
-                            <i class="fas fa-times"></i>
-                        </a>
-                        |
-                        <a class="task_edit" href="<?php echo base_url(); ?>tasks/edit/<?php echo $task->id; ?>/<?php echo $project->id; ?>">
-                            <i class="fas fa-pen"></i>
-                        </a>
-                        |
-                        <a class="task_delete" href="<?php echo base_url(); ?>tasks/delete/<?php echo $task->id; ?>/<?php echo $project->id; ?>">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <?php echo $task->body; ?>
-                    </td>
-                    <td>
-                        <?php echo nice_date($task->created_at, 'd-m-Y H:m:s'); ?>
-                    </td>
-                    <td>
-                        <?php echo nice_date($task->due_date, 'd-m-Y'); ?>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <?php } else { ?>
-            No completed tasks
-        <?php } ?>
+                            <th>
+                                Task Body
+                            </th>
+                            <th>Date</th>
+                            <th>Due Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($completedTasks as $task): ?>
+                        <tr>
+                            <td>
+                                <?php echo $task->name; ?><br>
+                                <a class="task_status" href="<?php echo base_url(); ?>tasks/status/<?php echo $task->id; ?>/<?php echo $project->id; ?>/<?php echo $task->status; ?>">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                                |
+                                <a class="task_edit" href="<?php echo base_url(); ?>tasks/edit/<?php echo $task->id; ?>/<?php echo $project->id; ?>">
+                                    <i class="fas fa-pen"></i>
+                                </a>
+                                |
+                                <a class="task_delete" href="<?php echo base_url(); ?>tasks/delete/<?php echo $task->id; ?>/<?php echo $project->id; ?>">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <?php echo $task->body; ?>
+                            </td>
+                            <td>
+                                <?php echo nice_date($task->created_at, 'd-m-Y H:m:s'); ?>
+                            </td>
+                            <td>
+                                <?php echo nice_date($task->due_date, 'd-m-Y'); ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <?php } else { ?>
+                <table class="table">
+                    <tr>
+                        <td>
+                            No completed tasks
+                        </td>
+                    </tr>
+                </table>
+                <?php } ?>
+            </div>
+        </div>
     </div>
 </div>
